@@ -1,1 +1,1 @@
-web: node webtrc_signal_server.js
+web: node webrtc_signal_server.js
