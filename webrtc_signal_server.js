@@ -29,7 +29,8 @@
 // useful libs
 var http = require("http");
 var fs = require("fs");
-var websocket = require("websocket").server;
+//var websocket = require("websocket").server;
+var websocket = require("ws").server;  // JHS changed from "websocket" to "ws"
 
 // general variables
 var port = 1234;
