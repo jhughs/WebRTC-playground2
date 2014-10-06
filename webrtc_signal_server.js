@@ -30,7 +30,7 @@
 var http = require("http");
 var fs = require("fs");
 //var websocket = require("websocket").server;
-var websocket = require("ws").server;  // JHS changed from "websocket" to "ws"
+var websocket = require("ws").Server;  // JHS changed from "websocket" to "ws"
 										// JHS "Server" vs. "server" ????
 
 // general variables
