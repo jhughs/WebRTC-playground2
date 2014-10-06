@@ -66,7 +66,7 @@ fs.readFile("basic_video_call.html", function(error, data) {
 });
 
 // web socket functions
-var websocket_server = new ws({   // new websocket server
+var websocket_server = new websocket({   // new websocket server
   httpServer: http_server
 });
 websocket_server.on("request", function(request) {
