@@ -68,7 +68,8 @@ fs.readFile("basic_video_call.html", function(error, data) {
 
 // web socket functions
 var websocket_server = new websocket({   // new websocket server
-  httpServer: http_server
+  //httpServer: http_server				// removed old code JHS
+	server: http_server					// example https://github.com/heroku-examples/node-ws-test/blob/master/index.js
 });
 websocket_server.on("request", function(request) {
   log_comment("new request ("+request.origin+")");
