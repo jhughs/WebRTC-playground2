@@ -33,7 +33,7 @@ var fs = require("fs");
 var websocket = require("ws").Server;  // JHS changed from "websocket" to "ws"
 
 // general variables
-var port = 1234;
+var port = process.env.PORT || 5000;  // port requirement for Heroku; was 1234;  jhs
 var webrtc_clients = [];
 var webrtc_discussions = {};
 
