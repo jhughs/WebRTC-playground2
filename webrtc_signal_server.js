@@ -1,6 +1,6 @@
 /*
 
-  webrtc_signal_server.js by Rob Manson
+  webrtc_signal_server.js by Rob Manson; modified for Heroku by Jeffrey Schmitt (JHS)
 
   The MIT License
 
