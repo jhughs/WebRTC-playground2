@@ -27,22 +27,24 @@
 */
 
 // useful libs
-var http = require("http");
-var fs = require("fs");
+var http = require("http");				// web server
+var fs = require("fs");					// file system
 //var websocket = require("websocket").server;
-var websocket = require("ws").Server;  // JHS changed from "websocket" to "ws"
+var websocket = require("ws").Server;  	// JHS changed from "websocket" to "ws"
 										// JHS "Server" vs. "server" ????
 
 // general variables
-var port = process.env.PORT || 5000;  // port requirement for Heroku; was 1234;  jhs
-var webrtc_clients = [];
-var webrtc_discussions = {};
+var port = process.env.PORT || 5000;  	// port requirement for Heroku; was 1234;  jhs
+										// port = heroku selected or, for localhost, 5000
+var webrtc_clients = [];				// list of browsers w/open websocket connections to this server
+var webrtc_discussions = {};			// object to store an indexed list of calls; call_tokens as index
 
 // web server functions
 var http_server = http.createServer(function(request, response) {
   var matches = undefined;
   if (matches = request.url.match("^/images/(.*)")) {
     var path = process.cwd()+"/images/"+matches[1];
+	log_comment("path = "+path);		// jhs added for debugging
     fs.readFile(path, function(error, data) {
       if (error) {
         log_error(error);
@@ -68,10 +70,11 @@ fs.readFile("basic_video_call.html", function(error, data) {
 
 // web socket functions
 var websocket_server = new websocket({   // new websocket server
-  //httpServer: http_server				// removed old code JHS
-	server: http_server					// example https://github.com/heroku-examples/node-ws-test/blob/master/index.js
-	console.log("JHS: websocket server created");
+  //httpServer: http_server				// adjusted for Heroku "server:" instead of "httpServer:"
+	server: http_server				// example https://github.com/heroku-examples/node-ws-test/blob/master/index.js
 });
+console.log("JHS: websocket server created");  // added for troubleshooting
+
 websocket_server.on("request", function(request) {
   log_comment("new request ("+request.origin+")");
 
@@ -133,5 +136,5 @@ function log_error(error) {
   }
 }
 function log_comment(comment) {
-  console.log((new Date())+" "+comment);
+  console.log((new Date())+"HEROKU WEBRTC "+comment);
 }
